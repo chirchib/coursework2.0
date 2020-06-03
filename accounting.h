@@ -12,15 +12,15 @@ public:
 		typeofEqiup(Eqiup), Model(mod), serialNumber(serNum), inventoryNumber(invNum)
 	{ }
 
-	void display();
+	void display() const;
 
-	string set_typeofEqiup(string _type);
+	void set_typeofEqiup(string _type);
+	
+	void set_Model(string _Model);
+	
+	void set_serialNumber(string _serNum);
 
-	string set_Model(string _Model);
-
-	string set_serialNumber(string _serNum);
-
-	long set_inventoryNumber(long _invNum);
+	void set_inventoryNumber(long _invNum);
 
 	string get_typeofEqiup();
 

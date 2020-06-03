@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 
-void accounting::display()
+void accounting::display() const
 {
 	cout << endl << setw(20) << left << typeofEqiup
 		<< setw(20) << left << Model
@@ -30,22 +30,22 @@ long accounting::get_inventoryNumber()
 	return inventoryNumber;
 }
 
-string accounting::set_typeofEqiup(string _type)
+void accounting::set_typeofEqiup(string _type)
 {
 	 typeofEqiup = _type;
 }
 
-string accounting::set_Model(string _Model)
+void accounting::set_Model(string _Model)
 {
 	Model = _Model;
 }
 
-string accounting::set_serialNumber(string _serNum)
+void accounting::set_serialNumber(string _serNum)
 {
 	serialNumber = _serNum;
 }
 
-long accounting::set_inventoryNumber(long _invNum)
+void accounting::set_inventoryNumber(long _invNum)
 {
 	inventoryNumber = _invNum;
 }

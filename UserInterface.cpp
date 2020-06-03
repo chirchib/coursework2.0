@@ -7,7 +7,7 @@ using namespace std;
 void UserInterface::main_menu()
 {
 	system("cls");
-	cout << "Добро подаловать!\n";
+	cout << "Добро пожаловать!\n";
 	cout << "\nВыберите пункт: "
 		 << "\n1) Добавить новую информацию или удалить."
 		 << "\n2) Редактировать существующую информацию."
@@ -57,6 +57,11 @@ void UserInterface::menu1()
 		cin >> choice;
 		switch (choice)
 		{
+		case '1':
+		{
+
+		}
+		break;
 		case '0':
 			main_menu();
 			break;
@@ -152,7 +157,7 @@ void UserInterface::get_header()
 
 void UserInterface::menu1_1()
 {
-	addVect();
+	
 	menu1();
 }
 

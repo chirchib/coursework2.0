@@ -5,12 +5,17 @@
 class data
 {
 public:
-	void data_vector(string Eqiup, string mod, string serNum, long invNum);
+//	void data_vector(string Eqiup, string mod, string serNum, long invNum);
 
-	void AddVector();
+	void add(accounting account);
 
-	void display_vector();
+	void save();
+
+	void load();
+
+	void print();
+
 private:
-	vector<accounting*> vector_acc;
+	vector<accounting> vector_acc;
 };
 
