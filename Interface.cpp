@@ -123,14 +123,135 @@ void menu3()
 		<< "\n5) Поиск по всем пунктам"
 		<< "\n0) Вернуться"
 		<< "\nВаш выбор: ";
-	while (true)
+	bool tmp = false;
+	string searchTypeofEqiup, searchModel, searchSerialNumber;
+	long searchInventoryNumber;
+	auto data = Data();
+	data.load();
+	vector<accounting> searchVect;
+	for (int i = 0; i < data.getSize(); i++)
+	{
+		searchVect.push_back(data.getVector(i));
+	}
+	bool found_one = false;
+	while (!tmp)
 	{
 		char choice;
 		cin >> choice;
 		switch (choice)
 		{
+		case '1':
+			cout << "\nВведите тип оборудования: " << endl;
+			cin >> searchTypeofEqiup;
+			for (auto it = searchVect.begin(); it != searchVect.end(); ++it)
+			{
+				if (searchTypeofEqiup == (*it).get_typeofEqiup())
+				{
+					if (!found_one)
+					{
+						cout << "\nУдалось найти: ";
+						found_one = true;
+					}
+					(*it).display();
+				}
+			}
+			if (!found_one)
+			{
+				cout << "\nНе удалось ничего найти.";
+			}
+			break;
+		case '2':
+			found_one = false;
+			cout << "\nВведите модель оборудования: " << endl;
+			cin >> searchModel;
+			for (auto it = searchVect.begin(); it != searchVect.end(); ++it)
+			{
+				if (searchModel == (*it).get_Model())
+				{
+					if (!found_one)
+					{
+						cout << "\nУдалось найти: ";
+						found_one = true;
+					}
+					(*it).display();
+				}
+			}
+			if (!found_one)
+			{
+				cout << "\nНе удалось ничего найти.";
+			}
+			break;
+		case '3':
+			cout << "\nВведите серийный номер: " << endl;
+			cin >> searchSerialNumber;
+			found_one = false;
+			for (auto it = searchVect.begin(); it != searchVect.end(); ++it)
+			{
+				if (searchSerialNumber == (*it).get_serialNumber())
+				{
+					if (!found_one)
+					{
+						cout << "\nУдалось найти: ";
+						found_one = true;
+					}
+					(*it).display();
+				}
+			}
+			if (!found_one)
+			{
+				cout << "\nНе удалось ничего найти.";
+			}
+			break;
+		case '4':
+			cout << "\nВведите инвентарный номер: " << endl;
+			cin >> searchInventoryNumber;
+			found_one = false;
+			for (auto it = searchVect.begin(); it != searchVect.end(); ++it)
+			{
+				if (searchSerialNumber == (*it).get_serialNumber())
+				{
+					if (!found_one)
+					{
+						cout << "\nУдалось найти: ";
+						found_one = true;
+					}
+					(*it).display();
+				}
+			}
+			if (!found_one)
+			{
+				cout << "\nНе удалось ничего найти.";
+			}
+			break;
+		case '5':
+			cout << "\nВведите тип оборудования: " << endl;
+			cin >> searchTypeofEqiup;
+			cout << "\nВведите модель оборудования: " << endl;
+			cin >> searchModel;
+			cout << "\nВведите серийный номер: " << endl;
+			cin >> searchSerialNumber;
+			cout << "\nВведите инвентарный номер: " << endl;
+			cin >> searchInventoryNumber;
+			found_one = false;
+			for (auto it = searchVect.begin(); it != searchVect.end(); ++it)
+			{
+				if (searchSerialNumber == (*it).get_serialNumber())
+				{
+					if (!found_one)
+					{
+						cout << "\nУдалось найти: ";
+						found_one = true;
+					}
+					(*it).display();
+				}
+			}
+			if (!found_one)
+			{
+				cout << "\nНе удалось ничего найти.";
+			}
+			break;
 		case '0':
-			main_menu();
+			tmp++;
 			break;
 		default:
 			system("cls");
@@ -138,12 +259,14 @@ void menu3()
 			break;
 		}
 	}
+	main_menu();
+	return;
 }
 
 void menu4()
 {
 	system("cls");
-	cout << "1)Вывести\n0) Вернуться"
+	cout << "1) Вывести\n0) Вернуться"
 		<< "\nВаш выбор: ";
 	bool tmp = false;
 	while (!tmp)

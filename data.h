@@ -6,6 +6,9 @@ using namespace std;
 class Data
 {
 public:
+	accounting getVector(int i);
+
+	int getSize();
 
 	void add(accounting account);
 
