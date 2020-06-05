@@ -7,6 +7,9 @@
 using namespace std;
 
 
+data::data()
+{}
+
 void data::add(accounting account)
 {
 	vector_acc.push_back(account);

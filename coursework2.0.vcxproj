@@ -149,13 +149,14 @@
   <ItemGroup>
     <ClCompile Include="accounting.cpp" />
     <ClCompile Include="data.cpp" />
+    <ClCompile Include="Interface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UserInterface.cpp" />
-    <ClCompile Include="vector_func.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="accounting.h" />
     <ClInclude Include="data.h" />
+    <ClInclude Include="Interface.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

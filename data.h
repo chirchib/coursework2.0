@@ -2,10 +2,11 @@
 #include "accounting.h"
 #include <iostream>
 #include <vector>
+using namespace std;
 class data
 {
 public:
-//	void data_vector(string Eqiup, string mod, string serNum, long invNum);
+	data();
 
 	void add(accounting account);
 

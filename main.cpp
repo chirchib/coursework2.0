@@ -1,8 +1,7 @@
-﻿#include "UserInterface.h"
-#include <iostream>
+﻿#include "Interface.h"
+#include "data.h"
 int main()
 {
-	setlocale(LC_ALL, "Russian");
-	UserInterface theinterface;
-	theinterface.main_menu();
+	Interface();
+	return 0;
 }
