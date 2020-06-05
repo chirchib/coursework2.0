@@ -1,5 +1,4 @@
 ﻿#include "Interface.h"
-#include "data.h"
 int main()
 {
 	Interface();

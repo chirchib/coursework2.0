@@ -25,7 +25,8 @@ void main_menu()
 		<< "\n4) Вывести данные."
 		<< "\n0) Выйти"
 		<< "\nВаш выбор: ";
-	while (true)
+	bool tmp = false;
+	while (!tmp)
 	{
 		char choice;
 		cin >> choice;
@@ -44,13 +45,15 @@ void main_menu()
 			menu4();
 			break;
 		case '0':
-			return;
+			tmp++;
+			break;
 		default:
 			system("cls");
 			cout << "\nТакого варианта не существует, попробуйте еще раз";
 			break;
 		}
 	}
+	return;
 }
 
 void menu1()
@@ -61,7 +64,8 @@ void menu1()
 		<< "\n2) Удалить"
 		<< "\n0)Вернуться"
 		<< "\nВаш выбор: ";
-	while (true)
+	bool tmp = false;
+	while (!tmp)
 	{
 		char choice;
 		cin >> choice;
@@ -69,11 +73,12 @@ void menu1()
 		{
 		case '1':
 		{
-
+			menu1_1();
+			break;
 		}
 		break;
 		case '0':
-			main_menu();
+			tmp++;
 			break;
 		default:
 			system("cls");
@@ -81,6 +86,7 @@ void menu1()
 			break;
 		}
 	}
+	main_menu();
 }
 
 void menu2()
@@ -137,16 +143,26 @@ void menu3()
 void menu4()
 {
 	system("cls");
-	cout << "\n0) Вернуться"
+	cout << "1)Вывести\n0) Вернуться"
 		<< "\nВаш выбор: ";
-	while (true)
+	bool tmp = false;
+	while (!tmp)
 	{
 		char choice;
 		cin >> choice;
 		switch (choice)
 		{
+		case '1':
+		{
+			auto data = Data();
+			data.load();
+			get_header();
+			data.print();
+		}
+			cout << endl;
+			break;
 		case '0':
-			main_menu();
+			tmp++;
 			break;
 		default:
 			system("cls");
@@ -154,6 +170,8 @@ void menu4()
 			break;
 		}
 	}
+	main_menu();
+	return;
 }
 
 void get_header()
@@ -161,14 +179,14 @@ void get_header()
 	cout << endl << setw(20) << left << "Type of Eqiupment"
 		<< setw(20) << left << "Model"
 		<< setw(20) << left << "Serial Number"
-		<< setw(20) << left << "Inventory Number" << endl
-		<< setw(70) << setfill('-');
+		<< setw(20) << left << "Inventory Number" << endl;
+	return;
 }
 
 void menu1_1()
 {
-	auto Data = data();
-
+	auto data = Data();
+	data.load();
 
 	string _eqiup, _mod, _sernum;
 	long _invnum;
@@ -184,7 +202,8 @@ void menu1_1()
 	cin >> _invnum;
 
 	auto account = accounting(_eqiup, _mod, _sernum, _invnum);
-	Data.add(account);
+	data.add(account);
+	data.save();
 	menu1();
 }
 
