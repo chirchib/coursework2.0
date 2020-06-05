@@ -167,7 +167,7 @@ void get_header()
 
 void menu1_1()
 {
-	auto Data = data();
+	Data data = Data();
 
 
 	string _eqiup, _mod, _sernum;
@@ -184,7 +184,7 @@ void menu1_1()
 	cin >> _invnum;
 
 	auto account = accounting(_eqiup, _mod, _sernum, _invnum);
-	Data.add(account);
+	data.add(account);
 	menu1();
 }
 

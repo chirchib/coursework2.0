@@ -3,10 +3,11 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-class data
+
+class Data
 {
 public:
-	data();
+	Data();
 
 	void add(accounting account);
 

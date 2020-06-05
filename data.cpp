@@ -7,15 +7,15 @@
 using namespace std;
 
 
-data::data()
+Data::Data()
 {}
 
-void data::add(accounting account)
+void Data::add(accounting account)
 {
 	vector_acc.push_back(account);
 }
 
-void data::save()
+void Data::save()
 {
 	ofstream fp;//Файловый поток записи
 	fp.open("file.txt", ios_base::trunc | ios::out);//Открытие файла и очистка его содержимого
@@ -31,7 +31,7 @@ void data::save()
 	fp.close(); //Закрыть файл
 }
 
-void data::load()
+void Data::load()
 {
 	ifstream fp;//Файловый поток чтения
 	fp.open("file.txt");//Открытие файла
@@ -51,7 +51,7 @@ void data::load()
 	fp.close();//Закрыть файл
 }
 
-void data::print()
+void Data::print()
 {
 	for (auto it : vector_acc)
 	{
