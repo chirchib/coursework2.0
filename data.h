@@ -3,12 +3,11 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+
 class Data
 {
 public:
-	accounting getVector(int i);
-
-	int getSize();
+	Data();
 
 	void add(accounting account);
 
