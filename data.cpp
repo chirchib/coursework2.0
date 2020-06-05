@@ -6,9 +6,15 @@
 #include <fstream>
 using namespace std;
 
+accounting Data::getVector(int i)
+{
+	return vector_acc[i];
+}
 
-Data::Data()
-{}
+int Data::getSize()
+{
+	return vector_acc.size();
+}
 
 void Data::add(accounting account)
 {
