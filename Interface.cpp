@@ -55,7 +55,6 @@ void main_menu()
 
 void menu1()
 {
-	system("cls");
 	cout << "Добавление нового оборудования: ";
 	cout << "\n1) Добавить"
 		<< "\n2) Удалить"
@@ -89,18 +88,21 @@ void menu1()
 
 void menu2()
 {
-	system("cls");
 	cout << "Редактирование информации: ";
-	cout << "\n0) Вернуться"
+	cout << "\n1) Редакитровать\n0) Вернуться"
 		<< "\nВаш выбор: ";
-	while (true)
+	bool tmp = false;
+	while (!tmp)
 	{
 		char choice;
 		cin >> choice;
 		switch (choice)
 		{
+		case '1':
+			menu2_1();
+			break;
 		case '0':
-			main_menu();
+			tmp++;
 			break;
 		default:
 			system("cls");
@@ -108,22 +110,25 @@ void menu2()
 			break;
 		}
 	}
+	main_menu();
+	return;
 }
 
 void menu3()
 {
-	system("cls");
 	cout << "Поиск информации:"
-		<< "\n1) Поиск по типу оборудования"
-		<< "\n2) Поиск по модели"
-		<< "\n3) Поиск по серийному номеру"
-		<< "\n4) Поиск по инвентарному номеру"
-		<< "\n5) Поиск по всем пунктам"
+		<< "\n1) Поиск по ID"
+		<< "\n2) Поиск по типу оборудования"
+		<< "\n3) Поиск по модели"
+		<< "\n4) Поиск по серийному номеру"
+		<< "\n5) Поиск по инвентарному номеру"
+		<< "\n6) Поиск по всем пунктам"
 		<< "\n0) Вернуться"
 		<< "\nВаш выбор: ";
 	bool tmp = false;
 	while (!tmp)
 	{
+		int searchID;
 		string searchTypeofEqiup, searchModel, searchSerialNumber;
 		long searchInventoryNumber;
 		auto data = Data();
@@ -142,6 +147,28 @@ void menu3()
 			switch (choice)
 			{
 			case '1':
+				cout << "\nВведите ID: " << endl;
+				cin >> searchID;
+				found_one = false;
+				for (auto it = searchVect.begin(); it != searchVect.end(); ++it)
+				{
+					if (searchID == (*it).get_ID())
+					{
+						if (!found_one)
+						{
+							cout << "\nУдалось найти: ";
+							get_header();
+							found_one = true;
+						}
+						(*it).display();
+					}
+				}
+				if (!found_one)
+				{
+					cout << "\nНе удалось ничего найти.";
+				}
+				break;
+			case '2':
 				cout << "\nВведите тип оборудования: " << endl;
 				cin >> searchTypeofEqiup;
 				found_one = false;
@@ -163,7 +190,7 @@ void menu3()
 					cout << "\nНе удалось ничего найти.";
 				}
 				break;
-			case '2':
+			case '3':
 				cout << "\nВведите модель оборудования: " << endl;
 				cin >> searchModel;
 				found_one = false;
@@ -185,7 +212,7 @@ void menu3()
 					cout << "\nНе удалось ничего найти.";
 				}
 				break;
-			case '3':
+			case '4':
 				cout << "\nВведите серийный номер: " << endl;
 				cin >> searchSerialNumber;
 				found_one = false;
@@ -207,7 +234,7 @@ void menu3()
 					cout << "\nНе удалось ничего найти.";
 				}
 				break;
-			case '4':
+			case '5':
 				cout << "\nВведите инвентарный номер: " << endl;
 				cin >> searchInventoryNumber;
 				found_one = false;
@@ -230,7 +257,9 @@ void menu3()
 				}
 
 				break;
-			case '5':
+			case '6':
+				cout << "\nВведите ID: " << endl;
+				cin >> searchID;
 				cout << "\nВведите тип оборудования: " << endl;
 				cin >> searchTypeofEqiup;
 				cout << "\nВведите модель оборудования: " << endl;
@@ -242,7 +271,8 @@ void menu3()
 				found_one = false;
 				for (auto it = searchVect.begin(); it != searchVect.end(); ++it)
 				{
-					if (searchSerialNumber == (*it).get_serialNumber()
+					if (searchID == (*it).get_ID()
+						&& searchSerialNumber == (*it).get_serialNumber()
 						&& searchModel == (*it).get_Model()
 						&& searchSerialNumber == (*it).get_serialNumber()
 						&& searchInventoryNumber == (*it).get_inventoryNumber())
@@ -277,7 +307,6 @@ void menu3()
 
 void menu4()
 {
-	system("cls");
 	cout << "\n0) Вернуться"
 		<< "\nВаш выбор: ";
 	while (true)
@@ -299,7 +328,8 @@ void menu4()
 
 void get_header()
 {
-	cout << endl << setw(20) << left << "Type of Eqiupment"
+	cout << endl << setw(10) << left << "ID"
+		<< setw(20) << left << "Type of Eqiupment"
 		<< setw(20) << left << "Model"
 		<< setw(20) << left << "Serial Number"
 		<< setw(20) << left << "Inventory Number" << endl;
@@ -310,11 +340,13 @@ void menu1_1()
 {
 	Data data = Data();
 
-
+	int _id;
 	string _eqiup, _mod, _sernum;
 	long _invnum;
 	system("cls");
 	cout << "Добавление новой информации" << endl;
+	cout << "Введите ID: " << endl;
+	cin >> _id;
 	cout << "Введите тип оборудования: " << endl;
 	cin >> _eqiup;
 	cout << "Введите модель: " << endl;
@@ -324,12 +356,67 @@ void menu1_1()
 	cout << "Введите инвентарный номер: " << endl;
 	cin >> _invnum;
 
-	auto account = accounting(_eqiup, _mod, _sernum, _invnum);
+	auto account = accounting(_id, _eqiup, _mod, _sernum, _invnum);
 	data.add(account);
+	data.save();
+	cout << "Добавление выполнено успешно." << endl;
 	menu1();
 }
 
 void menu1_2()
 {
+	system("cls");
+	Data data = Data();
+	data.load();
+	get_header();
+	data.print();
 
+	int id;
+	cout << "Введите ID элемента, который хотите удалить: " << endl;
+	cin >> id;
+	if (data.search(id) == true)
+	{
+		data.remove(id);
+		data.save();
+		cout << "Удаление выполнено успешно." << endl;
+	}
+	else
+		cout << "Такого элемента нет:" << endl;
+	menu1();
+	return;
+}
+
+void menu2_1()
+{
+	system("cls");
+	Data data = Data();
+	data.load();
+	get_header();
+	data.print();
+	int id;
+	cout << "\nВведите ID элемента, который хотите изменить: " << endl;
+	cin >> id;
+	if (data.search(id) == true)
+	{
+		string _TypeofEqiup, _Model, _SerialNumber;
+		long _InventoryNumber;
+
+		cout << "\nВведите тип оборудования: " << endl;
+		cin >> _TypeofEqiup;
+		cout << "\nВведите модель оборудования: " << endl;
+		cin >> _Model;
+		cout << "\nВведите серийный номер: " << endl;
+		cin >> _SerialNumber;
+		cout << "\nВведите инвентарный номер: " << endl;
+		cin >> _InventoryNumber;
+
+		auto account = accounting(id, _TypeofEqiup, _Model, _SerialNumber, _InventoryNumber);
+		data.edit(account);
+		data.save();
+		cout << "Редактирование выполненено успешно" << endl;
+	}
+	else
+		cout << "Такого элемента нет." << endl;
+	menu2();
+	return;
 }

@@ -4,16 +4,18 @@ using namespace std;
 class accounting
 {
 public:
-	accounting() : typeofEqiup(""),
+	accounting() : ID(0), typeofEqiup(""),
 		Model(""), serialNumber(""), inventoryNumber(0)
 	{ }
 
-	accounting(string Eqiup, string mod, string serNum, long invNum) :
-		typeofEqiup(Eqiup), Model(mod), serialNumber(serNum), inventoryNumber(invNum)
+	accounting(int Id, string Eqiup, string mod, string serNum, long invNum) : 
+		ID(Id), typeofEqiup(Eqiup), Model(mod), serialNumber(serNum), inventoryNumber(invNum)
 	{ }
 
 	void display() const;
 
+	void set_ID(int _Id);
+	
 	void set_typeofEqiup(string _type);
 	
 	void set_Model(string _Model);
@@ -21,6 +23,8 @@ public:
 	void set_serialNumber(string _serNum);
 
 	void set_inventoryNumber(long _invNum);
+
+	int get_ID();
 
 	string get_typeofEqiup();
 
@@ -31,6 +35,7 @@ public:
 	long get_inventoryNumber();
 
 private:
+	int ID;
 	string typeofEqiup;
 	string Model;
 	string serialNumber;
