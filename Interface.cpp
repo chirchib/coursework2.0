@@ -307,16 +307,80 @@ void menu3()
 
 void menu4()
 {
-	cout << "\n0) Вернуться"
+	cout << "\n1) Прямой вывод информации"
+		<< "\n2) Сортированный вывод по ID"
+		<< "\n3) Сортированный вывод по типу оборудования"
+		<< "\n0) Вернуться"
 		<< "\nВаш выбор: ";
-	while (true)
+
+	Data data = Data();
+	data.load();
+	vector<accounting> sortVect;
+	for (int i = 0; i < data.getSize(); i++)
+	{
+		sortVect.push_back(data.getVector(i));
+	}
+	int size = sortVect.size();
+	auto it = sortVect.begin();
+	bool tmp = false;
+	while (!tmp)
 	{
 		char choice;
 		cin >> choice;
 		switch (choice)
 		{
+		case '1':
+			it = sortVect.begin();
+			get_header();
+			while (it != sortVect.end())
+			{
+				(*it++).display();
+			}
+			break;
+		case '2':
+			for (auto i = 0; i < size - 1; i++)
+			{
+				int min = i;
+				accounting hel;
+				for (int j = i + 1; j < size; j++)
+				{
+					if (sortVect[j].get_ID() < sortVect[min].get_ID())
+						min = j;
+				}
+				hel = sortVect[i];
+				sortVect[i] = sortVect[min];
+				sortVect[min] = hel;
+			}
+			it = sortVect.begin();
+			get_header();
+			while (it != sortVect.end())
+			{
+				(*it++).display();
+			}
+			break;
+		case '3':
+			for (int i = 0; i < size - 1; i++)
+			{
+				int min = i;
+				accounting hel;
+				for (int j = i + 1; j < size; j++)
+				{
+					if (sortVect[j].get_typeofEqiup() < sortVect[min].get_typeofEqiup())
+						min = j;
+				}
+				hel = sortVect[i];
+				sortVect[i] = sortVect[min];
+				sortVect[min] = hel;
+			}
+			it = sortVect.begin();
+			get_header();
+			while (it != sortVect.end())
+			{
+				(*it++).display();
+			}
+			break;
 		case '0':
-			main_menu();
+			tmp++;
 			break;
 		default:
 			system("cls");
@@ -324,6 +388,8 @@ void menu4()
 			break;
 		}
 	}
+	main_menu();
+	return;
 }
 
 void get_header()
@@ -339,14 +405,19 @@ void get_header()
 void menu1_1()
 {
 	Data data = Data();
+	data.load();
 
 	int _id;
 	string _eqiup, _mod, _sernum;
 	long _invnum;
 	system("cls");
 	cout << "Добавление новой информации" << endl;
-	cout << "Введите ID: " << endl;
-	cin >> _id;
+	do
+	{
+		cout << "Введите ID: " << endl;
+		cin >> _id;
+	}
+	while (data.search(_id) == false);
 	cout << "Введите тип оборудования: " << endl;
 	cin >> _eqiup;
 	cout << "Введите модель: " << endl;

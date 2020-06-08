@@ -41,9 +41,3 @@ private:
 	string serialNumber;
 	long inventoryNumber;
 };
-
-class displayAccount
-{
-public:
-	void operator() (const accounting* ptrA) const;
-};

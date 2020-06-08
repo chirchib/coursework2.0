@@ -43,7 +43,7 @@ void accounting::set_ID(int _ID)
 
 void accounting::set_typeofEqiup(string _type)
 {
-	 typeofEqiup = _type;
+	typeofEqiup = _type;
 }
 
 void accounting::set_Model(string _Model)
@@ -59,9 +59,4 @@ void accounting::set_serialNumber(string _serNum)
 void accounting::set_inventoryNumber(long _invNum)
 {
 	inventoryNumber = _invNum;
-}
-
-void displayAccount::operator() (const accounting* ptrA) const
-{
-	ptrA->display();
 }
