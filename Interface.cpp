@@ -17,7 +17,6 @@ Interface::Interface()
 
 	data = Data();//Инициализация объекта 
 
-	data.connect();
 
 	data.load();//Загрузка
 
