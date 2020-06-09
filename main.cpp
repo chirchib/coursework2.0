@@ -1,8 +1,11 @@
-﻿#include "Interface.h"
+﻿
+#include "Interface.h"
 #include "data.h"
+
+
+
 int main()
 {
-	cout << "Test coommit" << endl;
-	Interface();
+	auto inter = Interface();
 	return 0;
 }

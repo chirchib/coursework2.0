@@ -1,7 +1,15 @@
 #pragma once
-#include "accounting.h"
+
+
+
+
 #include <iostream>
 #include <vector>
+
+#include "account.h"
+
+
+
 using namespace std;
 
 class Data
@@ -9,7 +17,28 @@ class Data
 public:
 	Data();
 
-	void add(accounting account);
+	void add(Account account);
+
+	
+	void connect()
+	{
+		/*
+		auto ftp = Ftp("testftpserver.ucoz.net", "etestftpserver", "12341234");
+		auto cd = ftp.cd("/Catalog");
+		auto get = ftp.get("file.txt");
+
+		if (get)
+		{
+			cout << "Файл загрузился с сервера" << endl;
+		}
+		else
+		{
+			cout << "Не удалось загрузить файл с сервера. Будет загружена локальная копия" << endl;
+		}
+		system("pause");
+		*/
+	}
+
 
 	void save();
 
@@ -18,6 +47,7 @@ public:
 	void print();
 
 private:
-	vector<accounting> vector_acc;
+	vector<Account> accounts;
+
 };
 

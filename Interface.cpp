@@ -1,19 +1,30 @@
 #include "Interface.h"
 #include "data.h"
-#include "accounting.h"
+#include "account.h"
 #include <iostream>
 #include <algorithm>
 #include <iomanip>
+#include <conio.h>
+
+#include <Windows.h>
+
 using namespace std;
 
-void Interface()
+Interface::Interface()
 {
 	setlocale(LC_ALL, "Russian");
-	main_menu();
-	return;
+	ios::sync_with_stdio(true);//Синхронизация iostream и стандартного потока(ускоряет cout)
+
+	data = Data();//Инициализация объекта 
+
+	data.connect();
+
+	data.load();//Загрузка
+
+	Interface::mainMenu();
 }
 
-void main_menu()
+void Interface::mainMenu()
 {
 
 	system("cls");
@@ -23,90 +34,85 @@ void main_menu()
 		<< "\n2) Редактировать существующую информацию."
 		<< "\n3) Поиск информации."
 		<< "\n4) Вывести данные."
-		<< "\n0) Выйти"
-		<< "\nВаш выбор: ";
-	while (true)
+		<< "\n0) Выйти\n";
+
+	char choice;
+	choice = _getch();//Замена cin на _getch() 
+	switch (choice)
 	{
-		char choice;
-		cin >> choice;
-		switch (choice)
-		{
-		case '1':
-			menu1();
-			break;
-		case '2':
-			menu2();
-			break;
-		case '3':
-			menu3();
-			break;
-		case '4':
-			menu4();
-			break;
-		case '0':
-			return;
-		default:
-			system("cls");
-			cout << "\nТакого варианта не существует, попробуйте еще раз";
-			break;
-		}
+	case '1':
+		Interface::menu1();
+		break;
+	case '2':
+		Interface::menu2();
+		break;
+	case '3':
+		Interface::menu3();
+		break;
+	case '4':
+		Interface::menu4();
+		break;
+	case '0':
+
+		data.save();
+		exit(EXIT_SUCCESS);
+		break;
+	default:
+		Interface::mainMenu();
+		break;
 	}
+		
 }
 
-void menu1()
+void Interface::menu1()
 {
 	system("cls");
 	cout << "Добавление нового оборудования: ";
 	cout << "\n1) Добавить"
 		<< "\n2) Удалить"
-		<< "\n0)Вернуться"
-		<< "\nВаш выбор: ";
-	while (true)
+		<< "\n0)Вернуться\n";
+	char choice;
+	choice = _getch();
+	switch (choice)
 	{
-		char choice;
-		cin >> choice;
-		switch (choice)
-		{
-		case '1':
-		{
-
-		}
+	case '1':
+		menu11();
 		break;
-		case '0':
-			main_menu();
-			break;
-		default:
-			system("cls");
-			cout << "\nТакого варианта не существует, попробуйте еще раз";
-			break;
-		}
+	case '2':
+		menu12();
+		break;
+	case '0':
+		mainMenu();
+		break;
+	default:
+		menu1();
+		break;
 	}
+
 }
 
-void menu2()
+void Interface::menu2()
 {
 	system("cls");
 	cout << "Редактирование информации: ";
-	cout << "\n0) Вернуться"
-		<< "\nВаш выбор: ";
-	while (true)
+	cout << "\n0) Вернуться\n";
+
+	char choice;
+	choice = _getch();
+	switch (choice)
 	{
-		char choice;
-		cin >> choice;
-		switch (choice)
-		{
-		case '0':
-			main_menu();
-			break;
-		default:
-			system("cls");
-			cout << "\nТакого варианта не существует, попробуйте еще раз";
-			break;
-		}
+	case '0':
+		Interface::mainMenu();
+		break;
+	default:
+		system("cls");
+		cout << "\nТакого варианта не существует, попробуйте еще раз";
+		break;
 	}
+
 }
 
-void menu3()
+void Interface::menu3()
 {
 	system("cls");
 	cout << "Поиск информации:"
@@ -115,80 +121,151 @@ void menu3()
 		<< "\n3) Поиск по серийному номеру"
 		<< "\n4) Поиск по инвентарному номеру"
 		<< "\n5) Поиск по всем пунктам"
-		<< "\n0) Вернуться"
-		<< "\nВаш выбор: ";
-	while (true)
+		<< "\n0) Вернуться\n";
+
+	char choice;
+	choice = _getch();
+	switch (choice)
 	{
-		char choice;
-		cin >> choice;
-		switch (choice)
-		{
-		case '0':
-			main_menu();
-			break;
-		default:
-			system("cls");
-			cout << "\nТакого варианта не существует, попробуйте еще раз";
-			break;
-		}
+	case '1':
+		Interface::menu31();
+		break;
+	case '2':
+		Interface::menu32();
+		break;
+	case '3':
+		Interface::menu33();
+		break;
+	case '4':
+		Interface::menu34();
+		break;
+	case '5':
+		Interface::menu35();
+		break;
+	case '0':
+		Interface::mainMenu();
+		break;
+	default:
+		Interface::menu3();
+		break;
 	}
+
 }
 
-void menu4()
+void Interface::menu4()
 {
 	system("cls");
-	cout << "\n0) Вернуться"
-		<< "\nВаш выбор: ";
-	while (true)
-	{
-		char choice;
-		cin >> choice;
-		switch (choice)
-		{
-		case '0':
-			main_menu();
-			break;
-		default:
-			system("cls");
-			cout << "\nТакого варианта не существует, попробуйте еще раз";
-			break;
-		}
-	}
+	//cout << "\n----Список данных----\n";
+	setCursorVisible(false);
+	getHeader();
+	this->data.print();
+	_getch();
+	setCursorVisible(true);
+	Interface::mainMenu();
 }
 
-void get_header()
+void Interface::getHeader()
 {
-	cout << endl << setw(20) << left << "Type of Eqiupment"
-		<< setw(20) << left << "Model"
-		<< setw(20) << left << "Serial Number"
-		<< setw(20) << left << "Inventory Number" << endl
+	cout << endl << setw(20) << left << "Тип"
+		<< setw(20) << left << "Модель"
+		<< setw(20) << left << "Серийный№"
+		<< setw(20) << left << "Инвентарный№" << endl
 		<< setw(70) << setfill('-');
 }
 
-void menu1_1()
+void Interface::menu11()
 {
-	Data data = Data();
-
-
-	string _eqiup, _mod, _sernum;
-	long _invnum;
+	int id;
+	string typeofEqiup;
+	string model;
+	string serialNumber;
+	long inventoryNumber;
 	system("cls");
 	cout << "Добавление новой информации" << endl;
+
+	//Добавил ввод ID
+	cout << "Введите ID: " << endl;
+	cin >> id;
 	cout << "Введите тип оборудования: " << endl;
-	cin >> _eqiup;
+	cin >> typeofEqiup;
 	cout << "Введите модель: " << endl;
-	cin >> _mod;
+	cin >> model;
 	cout << "Введите серийный номер:" << endl;
-	cin >> _sernum;
+	cin >> serialNumber;
 	cout << "Введите инвентарный номер: " << endl;
-	cin >> _invnum;
-
-	auto account = accounting(_eqiup, _mod, _sernum, _invnum);
+	cin >> inventoryNumber;
+	//Обновлённый конструктор аккаунта(???)
+	auto account = Account(id,typeofEqiup,model,serialNumber,inventoryNumber);
 	data.add(account);
-	menu1();
+	Interface::menu1();
 }
 
-void menu1_2()
+
+void Interface::menu12()
 {
-
+	system("cls");
+	cout << "\n----Удалить оборудование----\n";
+	//TODO Удаление оборудования
+	_getch();
+	Interface::menu1();
 }
+
+void Interface::menu31()
+{
+	system("cls");
+	cout << "\n----Поиск по типу оборудования----\n";
+	//TODO Поиск оборудования
+	_getch();
+	Interface::menu1();
+}
+
+void Interface::menu32()
+{
+	system("cls");
+	cout << "\n----Поиск по модели----\n";
+	//TODO Поиск по модели
+	_getch();
+	Interface::menu1();
+}
+
+void Interface::menu33()
+{
+	system("cls");
+	cout << "\n----Поиск по серийному номеру----\n";
+	//TODO Поиск по серийному номеру
+	_getch();
+	Interface::menu1();
+}
+
+void Interface::menu34()
+{
+	system("cls");
+	cout << "\n----Поиск по инвентарному номеру----\n";
+	//TODO Поиск по инвентарному номеру
+	_getch();
+	Interface::menu1();
+}
+
+void Interface::menu35()
+{
+	system("cls");
+	cout << "\n----Поиск по всем пунктам----\n";
+	//TODO Поиск по всем пунктам
+	_getch();
+	Interface::menu1();
+}
+
+
+
+///<summary>
+/// Устанавливает отображение курсора посредством WinAPI (Windows.h)
+///</summary>
+///<param name = "visible"> Видимость курсора </param>
+void Interface::setCursorVisible(bool visible)
+{
+	CONSOLE_CURSOR_INFO cci;
+	cci.dwSize = 1;
+	cci.bVisible = visible;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cci);
+}
+
