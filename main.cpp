@@ -3,7 +3,6 @@
 #include "data.h"
 
 
-
 int main()
 {
 	auto inter = Interface();

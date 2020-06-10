@@ -7,11 +7,15 @@
 #include <algorithm>
 #include <fstream>
 
+
+
+
 using namespace std;
 
 
 Data::Data()
-{}
+{
+}
 
 void Data::add(Account account)
 {
@@ -79,4 +83,30 @@ void Data::print()
 	{
 		it.display();
 	}
+}
+
+void Data::connectToServer()
+{
+	setlocale(LC_ALL, "rus");
+	ftp = Ftp();
+
+	if (!ftp.connectToHost("testftpserver.ucoz.net", "etestftpserver", "12341234"))//Если подключение не удалось
+	{
+		cout << "Ошибка загрузки базы данных" << endl;
+		exit(GetLastError());//Выйти и вернуть код ошибки
+	}
+}
+//Синхронизация локального файла с сервером
+bool Data::saveToServer()
+{
+	bool cond1 = ftp.cd("/Catalog");
+	bool cond2 = ftp.put("file.txt");
+	return cond1 && cond2;
+}
+
+bool Data::loadFromServer()
+{
+	bool cond1 = ftp.cd("/Catalog");
+	bool cond2 = ftp.get("file.txt");
+	return cond1 && cond2;
 }

@@ -12,16 +12,24 @@ using namespace std;
 
 Interface::Interface()
 {
-	setlocale(LC_ALL, "Russian");
+	setlocale(LC_ALL, "rus");
 	ios::sync_with_stdio(true);//Синхронизация iostream и стандартного потока(ускоряет cout)
 
-	data = Data();//Инициализация объекта 
+	data = Data();//Инициализация класса базы данных 
 
-	data.connect();
+	data.connectToServer();//Подключение к серверу
 
-	data.load();//Загрузка
+	bool isFileLoadFromServer = data.loadFromServer();//Загрузка удалённого файла в локальную директорию
 
-	Interface::mainMenu();
+	if (!isFileLoadFromServer)
+	{
+		cout << "Ошибка загрузки базы данных с сервера" << endl;
+		exit(GetLastError());
+	}
+
+	data.load();//Загрузка данных из локального файла в вектор
+
+	Interface::mainMenu();//Запуск меню
 }
 
 void Interface::mainMenu()
@@ -55,7 +63,19 @@ void Interface::mainMenu()
 	case '0':
 
 		data.save();
-		exit(EXIT_SUCCESS);
+		
+		if (data.saveToServer())
+		{
+			system("cls");
+			cout << "База данных успешно сохранена на сервер" << endl;
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			cout << "Ошибка сохранения базы данных на сервер" << endl;
+			exit(GetLastError());
+		}
+		
 		break;
 	default:
 		Interface::mainMenu();
