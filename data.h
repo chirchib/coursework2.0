@@ -8,7 +8,15 @@
 
 #include "account.h"
 
-#pragma comment(lib, "ftp.lib")
+#ifdef _WIN32
+#pragma comment(lib, "ftp32.lib")
+#endif
+
+#ifdef _WIN64
+#pragma comment(lib, "ftp64.lib")
+#endif
+
+
 
 #include "ftp.h"
 
