@@ -1,14 +1,14 @@
 #pragma once
 #include <iostream>
 using namespace std;
-class accounting
+class Account
 {
 public:
-	accounting() : ID(0), typeofEqiup(""),
+	Account() : ID(0), typeofEqiup(""),
 		Model(""), serialNumber(""), inventoryNumber(0)
 	{ }
 
-	accounting(int Id, string Eqiup, string mod, string serNum, long invNum) : 
+	Account(int Id, string Eqiup, string mod, string serNum, long invNum) : 
 		ID(Id), typeofEqiup(Eqiup), Model(mod), serialNumber(serNum), inventoryNumber(invNum)
 	{ }
 

@@ -1,12 +1,12 @@
 #include "data.h"
-#include "accounting.h"
+#include "Account.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <fstream>
 using namespace std;
 
-accounting Data::getVector(int _i)
+Account Data::getVector(int _i)
 {
 	return vector_acc[_i];
 }
@@ -16,12 +16,12 @@ int Data::getSize()
 	return vector_acc.size();
 }
 
-void Data::add(accounting account)
+void Data::add(Account account)
 {
 	vector_acc.push_back(account);
 }
 
-void Data::edit(accounting account)
+void Data::edit(Account account)
 {
 	for (auto it = vector_acc.begin(); it != vector_acc.end(); ++it)
 	{
@@ -89,7 +89,7 @@ void Data::load()
 		fp >> serNum;
 		fp >> invNum;
 		//Добавить клиента в базу
-		vector_acc.push_back(accounting(id, Eqiup, mod, serNum, invNum));
+		vector_acc.push_back(Account(id, Eqiup, mod, serNum, invNum));
 	}
 	fp.close();//Закрыть файл
 }

@@ -1,8 +1,8 @@
-#include "accounting.h"
+#include "Account.h"
 #include <iostream>
 #include <iomanip>
 
-void accounting::display() const
+void Account::display() const
 {
 	cout << endl << setw(10) << left << ID
 		<< setw(20) << left << typeofEqiup
@@ -11,52 +11,52 @@ void accounting::display() const
 		<< setw(20) << left << inventoryNumber;
 }
 
-int accounting::get_ID()
+int Account::get_ID()
 {
 	return ID;
 }
 
-string accounting::get_typeofEqiup()
+string Account::get_typeofEqiup()
 {
 	return  typeofEqiup;
 }
 
-string accounting::get_Model()
+string Account::get_Model()
 {
 	return Model;
 }
 
-string accounting::get_serialNumber()
+string Account::get_serialNumber()
 {
 	return serialNumber;
 }
 
-long accounting::get_inventoryNumber()
+long Account::get_inventoryNumber()
 {
 	return inventoryNumber;
 }
 
-void accounting::set_ID(int _ID)
+void Account::set_ID(int _ID)
 {
 	ID = _ID;
 }
 
-void accounting::set_typeofEqiup(string _type)
+void Account::set_typeofEqiup(string _type)
 {
 	typeofEqiup = _type;
 }
 
-void accounting::set_Model(string _Model)
+void Account::set_Model(string _Model)
 {
 	Model = _Model;
 }
 
-void accounting::set_serialNumber(string _serNum)
+void Account::set_serialNumber(string _serNum)
 {
 	serialNumber = _serNum;
 }
 
-void accounting::set_inventoryNumber(long _invNum)
+void Account::set_inventoryNumber(long _invNum)
 {
 	inventoryNumber = _invNum;
 }

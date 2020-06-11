@@ -147,13 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="accounting.cpp" />
+    <ClCompile Include="Account.cpp" />
     <ClCompile Include="data.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="accounting.h" />
+    <ClInclude Include="Account.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="Interface.h" />
   </ItemGroup>

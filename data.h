@@ -1,5 +1,5 @@
 #pragma once
-#include "accounting.h"
+#include "Account.h"
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -8,13 +8,13 @@ class Data
 {
 public:
 
-	accounting getVector(int _i);
+	Account getVector(int _i);
 
 	int getSize();
 
-	void add(accounting account);
+	void add(Account account);
 
-	void edit(accounting account);
+	void edit(Account account);
 
 	void remove(int _ID);
 
@@ -27,6 +27,6 @@ public:
 	void print();
 
 private:
-	vector<accounting> vector_acc;
+	vector<Account> vector_acc;
 };
 

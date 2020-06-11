@@ -1,6 +1,6 @@
 ﻿#include "Interface.h"
 int main()
 {
-	Interface();
+	auto interface = Interface();
 	return 0;
 }
