@@ -39,6 +39,7 @@ void Data::remove(int _ID)
 		if (_ID == (*it).get_ID())
 		{
 			vector_acc.erase(it);
+			return;
 		}
 	}
 }
