@@ -27,7 +27,9 @@ void Data::edit(Account account)
 	{
 		if ((*it).get_ID() == account.get_ID())
 		{
-			*it = account;
+			Data::remove(account.get_ID());
+			Data::add(account);
+			return;
 		}
 	}
 }
