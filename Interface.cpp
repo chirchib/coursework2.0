@@ -172,7 +172,7 @@ void Interface::menu3()
 
 }
 
-void Interface::menu4()
+void Interface::menu4()//коммент
 {
 	system("cls");
 	//cout << "\n----Список данных----\n";
