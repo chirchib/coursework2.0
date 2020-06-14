@@ -183,7 +183,7 @@ void Interface::menu4()//коммент
 	setCursorVisible(true);
 	Interface::mainMenu();
 }
-
+//Cyka blyad
 void Interface::getHeader()
 {
 	cout << endl << setw(20) << left << "Тип"
