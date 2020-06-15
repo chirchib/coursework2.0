@@ -10,6 +10,8 @@
 
 using namespace std;
 
+bool firstPrint = true;
+
 Interface::Interface()
 {
 	setlocale(LC_ALL, "rus");
@@ -172,18 +174,55 @@ void Interface::menu3()
 
 }
 
-void Interface::menu4()//коммент
+void Interface::menu4()
 {
 	system("cls");
+	cout << "Поиск информации:"
+		<< "\n1) Сортировать по типу оборудования"
+		<< "\n2) Сортировать по модели"
+		<< "\n3) Сортировать по серийному номеру"
+		<< "\n4) Сортировать по инвентарному номеру"
+		<< "\n0) Вернуться\n";
 	//cout << "\n----Список данных----\n";
 	setCursorVisible(false);
 	getHeader();
 	this->data.print();
+	char choice;
+	
+	
+	choice = _getch();
+	switch (choice)
+	{
+	case '1':
+		//Interface::menu41();
+		break;
+	case '2':
+		//Interface::menu42();
+		break;
+	case '3':
+		//Interface::menu43();
+
+
+		break;
+	case '4':
+		Interface::menu44();
+
+
+		break;
+	case '0':
+		Interface::menu4();
+		break;
+	default:
+		Interface::menu4();
+		break;
+	}
+	
+	
 	_getch();
 	setCursorVisible(true);
 	Interface::mainMenu();
 }
-//Cyka blyad
+
 void Interface::getHeader()
 {
 	cout << endl << setw(20) << left << "Тип"
@@ -275,7 +314,14 @@ void Interface::menu35()
 	Interface::menu1();
 }
 
+void  Interface::menu44()
+{
+	//Data::sortID(accounts)
+	
+	firstPrint = !firstPrint;
+	_getch();
 
+}
 
 ///<summary>
 /// Устанавливает отображение курсора посредством WinAPI (Windows.h)

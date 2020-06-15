@@ -77,6 +77,16 @@ void Data::load()
 	fp.close();//Закрыть файл
 }
 
+
+
+/*void Data::sortID(Account account)
+{
+	sort(accounts.begin(), accounts.end());
+
+}*/
+
+
+
 void Data::print()
 {
 	for (auto it : accounts)

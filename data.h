@@ -37,6 +37,8 @@ public:
 
 	void connectToServer();
 
+	//void sortID(Account account);
+
 	bool saveToServer();
 
 	bool loadFromServer();
